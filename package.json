@@ -1,0 +1,42 @@
+{
+  "name": "l2-rng-rates",
+  "version": "1.0.0",
+  "main": "src/backend/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/backend/server.js",
+    "dev": "nodemon src/backend/server.js",
+    "dev:frontend": "vite",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev:frontend\"",
+    "build": "node build.js",
+    "build:backend": "babel src/backend -d dist",
+    "build:frontend": "vite build",
+    "preview": "vite preview",
+    "vercel-build": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.5",
+    "@babel/node": "^7.23.3",
+    "@babel/preset-env": "^7.23.5",
+    "@popperjs/core": "^2.11.8",
+    "axios": "^1.6.2",
+    "bootstrap": "^5.3.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "concurrently": "^9.2.0",
+    "nodemon": "^3.0.2",
+    "vite": "^6.3.5"
+  }
+}
