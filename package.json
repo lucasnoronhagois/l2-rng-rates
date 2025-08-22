@@ -12,7 +12,7 @@
     "build:backend": "babel src/backend -d dist",
     "build:frontend": "vite build",
     "preview": "vite preview",
-    "vercel-build": "npm run build",
+    "vercel-build": "npm run build:frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -38,5 +38,8 @@
     "concurrently": "^9.2.0",
     "nodemon": "^3.0.2",
     "vite": "^6.3.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

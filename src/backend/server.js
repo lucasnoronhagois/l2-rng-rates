@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Servir arquivos estáticos do frontend (produção)
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
   app.use(express.static(path.join(__dirname, '../../dist')));
 } else {
   // Desenvolvimento
@@ -40,7 +40,7 @@ app.get('/api/test', (req, res) => {
 });
 
 // Rota para servir o React app em produção
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../dist/index.html'));
   });
