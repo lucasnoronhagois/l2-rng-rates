@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './RNGSimulator.css'
 
 const RNGSimulator = () => {
   const [customChance, setCustomChance] = useState(50)
@@ -35,10 +36,10 @@ const RNGSimulator = () => {
   const performRNG = () => {
     const randomValue = Math.random() * 100
     const success = randomValue <= currentChance
-    
+
     // Encontrar o item selecionado para calcular o preço
     const selectedItem = predefinedChances.find(item => item.value === currentChance)
-    
+
     const newResult = {
       success,
       chance: currentChance,
@@ -49,7 +50,7 @@ const RNGSimulator = () => {
     }
 
     setResult(newResult)
-    
+
     // Atualizar histórico
     const newHistory = [newResult, ...history].slice(0, 20) // Manter apenas os últimos 20
     setHistory(newHistory)
@@ -144,50 +145,49 @@ const RNGSimulator = () => {
                 </div>
               </div>
 
-                             {/* Chances Predefinidas */}
-               <div className="mb-4">
-                 <h5 className="mb-3">Chances Predefinidas L2:</h5>
-                 <div className="row g-2">
-                   {predefinedChances.map((preset, index) => (
-                     <div key={index} className="col-md-3">
-                       <button
-                         className={`btn btn-outline-primary btn-sm w-100 ${
-                           currentChance === preset.value ? 'active' : ''
-                         }`}
-                         onClick={() => setPresetChance(preset.value)}
-                         style={{ minHeight: '100px', padding: '8px' }}
-                       >
-                                                   {preset.image && (
-                            <img 
-                              src={preset.image} 
-                              alt={preset.label}
-                              className="img-fluid mb-1"
-                              style={{ maxHeight: '35px', width: 'auto', display: 'block', margin: '0 auto' }}
-                            />
-                          )}
-                          <div style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>
-                            {preset.label}
-                          </div>
-                          <div style={{ fontSize: '0.75rem', color: '#6c757d' }}>
-                            {preset.value}%
-                          </div>
-                          {preset.price && (
-                            <div style={{ fontSize: '0.7rem', marginTop: '2px' }}>
-                              <div style={{ color: '#28a745' }}>
-                                💰 {formatAdena(preset.price.adena)} Adena
-                              </div>
-                              {preset.price.coins > 0 && (
-                                <div style={{ color: '#ffc107' }}>
-                                   {preset.price.coins} Giran Seal
-                                </div>
-                              )}
+              {/* Chances Predefinidas */}
+              <div className="mb-4">
+                <h5 className="mb-3">Chances Predefinidas L2:</h5>
+                <div className="row g-2">
+                  {predefinedChances.map((preset, index) => (
+                    <div key={index} className="col-md-3">
+                      <button
+                        className={`btn btn-outline-primary btn-sm w-100 ${currentChance === preset.value ? 'active' : ''
+                          }`}
+                        onClick={() => setPresetChance(preset.value)}
+                        style={{ minHeight: '100px', padding: '8px' }}
+                      >
+                        {preset.image && (
+                          <img
+                            src={preset.image}
+                            alt={preset.label}
+                            className="img-fluid mb-1"
+                            style={{ maxHeight: '35px', width: 'auto', display: 'block', margin: '0 auto' }}
+                          />
+                        )}
+                        <div style={{ fontSize: '0.85rem', fontWeight: 'bold' }}>
+                          {preset.label}
+                        </div>
+                        <div style={{ fontSize: '0.75rem', color: '#6c757d' }}>
+                          {preset.value}%
+                        </div>
+                        {preset.price && (
+                          <div style={{ fontSize: '0.7rem', marginTop: '2px' }}>
+                            <div style={{ color: '#28a745' }}>
+                              💰 {formatAdena(preset.price.adena)} Adena
                             </div>
-                          )}
-                       </button>
-                     </div>
-                   ))}
-                 </div>
-               </div>
+                            {preset.price.coins > 0 && (
+                              <div style={{ color: '#ffc107' }}>
+                                {preset.price.coins} Giran Seal
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               {/* Resultado Atual */}
               {result && (
@@ -196,73 +196,73 @@ const RNGSimulator = () => {
                     <h3 className="mb-2">
                       {result.success ? '✅ SUCCESS!' : '❌ FAIL!'}
                     </h3>
-                                         <p className="mb-0">
-                       {result.item} | Chance: {result.chance}% | Roll: {result.roll} | 
-                       {result.success ? ` Sucesso (≤ ${result.chance})` : ` Falha (> ${result.chance})`}
-                     </p>
-                     {result.price && result.price.adena > 0 && (
-                       <p className="mb-0 mt-2">
-                         <small>
-                           💰 {formatAdena(result.price.adena)} Adena
-                           {result.price.coins > 0 && ` |  ${result.price.coins} Giran Seal`}
-                         </small>
-                       </p>
-                     )}
+                    <p className="mb-0">
+                      {result.item} | Chance: {result.chance}% | Roll: {result.roll} |
+                      {result.success ? ` Sucesso (≤ ${result.chance})` : ` Falha (> ${result.chance})`}
+                    </p>
+                    {result.price && result.price.adena > 0 && (
+                      <p className="mb-0 mt-2">
+                        <small>
+                          💰 {formatAdena(result.price.adena)} Adena
+                          {result.price.coins > 0 && ` |  ${result.price.coins} Giran Seal`}
+                        </small>
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
 
-                             {/* Estatísticas */}
-               <div className="row mb-4">
-                 <div className="col-md-2">
-                   <div className="card bg-light">
-                     <div className="card-body text-center">
-                       <h6 className="card-title">Total</h6>
-                       <h4 className="text-primary">{statistics.totalAttempts}</h4>
-                     </div>
-                   </div>
-                 </div>
-                 <div className="col-md-2">
-                   <div className="card bg-light">
-                     <div className="card-body text-center">
-                       <h6 className="card-title">Sucessos</h6>
-                       <h4 className="text-success">{statistics.successes}</h4>
-                     </div>
-                   </div>
-                 </div>
-                 <div className="col-md-2">
-                   <div className="card bg-light">
-                     <div className="card-body text-center">
-                       <h6 className="card-title">Falhas</h6>
-                       <h4 className="text-danger">{statistics.failures}</h4>
-                     </div>
-                   </div>
-                 </div>
-                 <div className="col-md-2">
-                   <div className="card bg-light">
-                     <div className="card-body text-center">
-                       <h6 className="card-title">Taxa</h6>
-                       <h4 className="text-info">{statistics.successRate}%</h4>
-                     </div>
-                   </div>
-                 </div>
-                 <div className="col-md-2">
-                   <div className="card bg-success text-white">
-                     <div className="card-body text-center">
-                       <h6 className="card-title">💰 Adena</h6>
-                       <h4>{formatAdena(totalSpent.adena)}</h4>
-                     </div>
-                   </div>
-                 </div>
-                 <div className="col-md-2">
-                   <div className="card bg-warning text-dark">
-                     <div className="card-body text-center">
-                       <h6 className="card-title">Giran Seal</h6>
-                       <h4>{totalSpent.coins}</h4>
-                     </div>
-                   </div>
-                 </div>
-               </div>
+              {/* Estatísticas */}
+              <div className="row mb-4">
+                <div className="col-md-2">
+                  <div className="card bg-light">
+                    <div className="card-body text-center">
+                      <h6 className="card-title">Total</h6>
+                      <h4 className="text-primary">{statistics.totalAttempts}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="card bg-light">
+                    <div className="card-body text-center">
+                      <h6 className="card-title">Sucessos</h6>
+                      <h4 className="text-success">{statistics.successes}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="card bg-light">
+                    <div className="card-body text-center">
+                      <h6 className="card-title">Falhas</h6>
+                      <h4 className="text-danger">{statistics.failures}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="card bg-light">
+                    <div className="card-body text-center">
+                      <h6 className="card-title">Taxa</h6>
+                      <h4 className="text-info">{statistics.successRate}%</h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="card bg-success text-white">
+                    <div className="card-body text-center">
+                      <h6 className="card-title">💰 Adena</h6>
+                      <h4>{formatAdena(totalSpent.adena)}</h4>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="card bg-warning text-dark">
+                    <div className="card-body text-center">
+                      <h6 className="card-title">Giran Seal</h6>
+                      <h4>{totalSpent.coins}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div className="text-center">
                 <button
@@ -275,6 +275,23 @@ const RNGSimulator = () => {
               </div>
             </div>
           </div>
+                     {/* Discord Section */}
+           <div className="text-center mt-3">
+             <a 
+               href="https://discord.com/users/335859108425236493" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-decoration-none"
+             >
+               <div className="discord-simple">
+                 <i className="fab fa-discord text-primary me-2"></i>
+                 <span className="discord-text">
+                   <img src="/discord.png" alt="Discord" className="discord-icon me-1" />
+                   lucasng
+                 </span>
+               </div>
+             </a>
+           </div>
         </div>
 
         {/* Histórico */}
@@ -290,27 +307,25 @@ const RNGSimulator = () => {
                 history.map((attempt, index) => (
                   <div
                     key={index}
-                    className={`border-start border-4 border-${
-                      attempt.success ? 'success' : 'danger'
-                    } ps-3 mb-3`}
+                    className={`border-start border-4 border-${attempt.success ? 'success' : 'danger'
+                      } ps-3 mb-3`}
                   >
                     <div className="d-flex justify-content-between">
-                      <span className={`fw-bold ${
-                        attempt.success ? 'text-success' : 'text-danger'
-                      }`}>
+                      <span className={`fw-bold ${attempt.success ? 'text-success' : 'text-danger'
+                        }`}>
                         {attempt.success ? 'SUCCESS' : 'FAIL'}
                       </span>
                       <small className="text-muted">{attempt.timestamp}</small>
                     </div>
-                                         <small className="text-muted">
-                       Chance: {attempt.chance}% | Roll: {attempt.roll}
-                       {attempt.price && attempt.price.adena > 0 && (
-                         <div style={{ fontSize: '0.7rem', marginTop: '2px' }}>
-                           💰 {formatAdena(attempt.price.adena)} Adena
-                           {attempt.price.coins > 0 && ` |  ${attempt.price.coins} Coins`}
-                         </div>
-                       )}
-                     </small>
+                    <small className="text-muted">
+                      Chance: {attempt.chance}% | Roll: {attempt.roll}
+                      {attempt.price && attempt.price.adena > 0 && (
+                        <div style={{ fontSize: '0.7rem', marginTop: '2px' }}>
+                          💰 {formatAdena(attempt.price.adena)} Adena
+                          {attempt.price.coins > 0 && ` |  ${attempt.price.coins} Coins`}
+                        </div>
+                      )}
+                    </small>
                   </div>
                 ))
               )}
