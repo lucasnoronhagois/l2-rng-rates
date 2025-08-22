@@ -121,7 +121,7 @@ const RNGSimulator = () => {
               {/* Campo de Chance Personalizada */}
               <div className="row mb-4">
                 <div className="col-md-6">
-                  <label className="form-label fw-bold">Chance Personalizada (%)</label>
+                  <label className="form-label fw-bold">Customized chance (%)</label>
                   <div className="input-group">
                     <input
                       type="number"
@@ -140,14 +140,14 @@ const RNGSimulator = () => {
                     className="btn btn-success btn-lg w-100"
                     onClick={performRNG}
                   >
-                    🎯 Testar RNG
+                    🎯 Try RNG
                   </button>
                 </div>
               </div>
 
               {/* Chances Predefinidas */}
               <div className="mb-4">
-                <h5 className="mb-3">Chances Predefinidas L2:</h5>
+                <h5 className="mb-3">Preset chances:</h5>
                 <div className="row g-2">
                   {predefinedChances.map((preset, index) => (
                     <div key={index} className="col-md-3">
@@ -198,7 +198,7 @@ const RNGSimulator = () => {
                     </h3>
                     <p className="mb-0">
                       {result.item} | Chance: {result.chance}% | Roll: {result.roll} |
-                      {result.success ? ` Sucesso (≤ ${result.chance})` : ` Falha (> ${result.chance})`}
+                      {result.success ? ` Success (≤ ${result.chance})` : ` Falha (> ${result.chance})`}
                     </p>
                     {result.price && result.price.adena > 0 && (
                       <p className="mb-0 mt-2">
@@ -225,7 +225,7 @@ const RNGSimulator = () => {
                 <div className="col-md-2">
                   <div className="card bg-light">
                     <div className="card-body text-center">
-                      <h6 className="card-title">Sucessos</h6>
+                      <h6 className="card-title">Success</h6>
                       <h4 className="text-success">{statistics.successes}</h4>
                     </div>
                   </div>
@@ -233,7 +233,7 @@ const RNGSimulator = () => {
                 <div className="col-md-2">
                   <div className="card bg-light">
                     <div className="card-body text-center">
-                      <h6 className="card-title">Falhas</h6>
+                      <h6 className="card-title">Fails</h6>
                       <h4 className="text-danger">{statistics.failures}</h4>
                     </div>
                   </div>
@@ -241,7 +241,7 @@ const RNGSimulator = () => {
                 <div className="col-md-2">
                   <div className="card bg-light">
                     <div className="card-body text-center">
-                      <h6 className="card-title">Taxa</h6>
+                      <h6 className="card-title">Rate</h6>
                       <h4 className="text-info">{statistics.successRate}%</h4>
                     </div>
                   </div>
@@ -270,7 +270,7 @@ const RNGSimulator = () => {
                   onClick={resetStatistics}
                   disabled={statistics.totalAttempts === 0}
                 >
-                  🔄 Resetar Estatísticas
+                  🔄 Reset
                 </button>
               </div>
             </div>
@@ -298,11 +298,11 @@ const RNGSimulator = () => {
         <div className="col-md-4">
           <div className="card shadow">
             <div className="card-header bg-secondary text-white">
-              <h5 className="mb-0">📊 Histórico Recente</h5>
+              <h5 className="mb-0">📊 Recent Record</h5>
             </div>
             <div className="card-body" style={{ maxHeight: '600px', overflowY: 'auto' }}>
               {history.length === 0 ? (
-                <p className="text-muted text-center">Nenhuma tentativa ainda</p>
+                <p className="text-muted text-center">No attempt yet.</p>
               ) : (
                 history.map((attempt, index) => (
                   <div
